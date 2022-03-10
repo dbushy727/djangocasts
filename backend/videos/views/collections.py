@@ -10,7 +10,3 @@ class CollectionViewSet(viewsets.ModelViewSet):
     serializer_class = MainCollecitonSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-    def list(self, request):
-        queryset = Collection.objects.all()
-        serializer = LiteCollectionSerializer(queryset, many=True)
-        return Response(serializer.data)
