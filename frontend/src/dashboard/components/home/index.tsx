@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import useLogout from "../../../auth/hooks/useLogout";
 import useAxios from "../../../core/hooks/useAxios";
 
 interface Video {
@@ -9,6 +10,7 @@ interface Video {
 const Home = () => {
   const [videos, setVideos] = useState<Video[]>([]);
   const { axios } = useAxios();
+  const { logout } = useLogout();
 
   const fetchVideos = async () => {
     const response = await axios.get("videos");
@@ -26,6 +28,7 @@ const Home = () => {
       {videos.map((video) => (
         <div key={video.id}>{video.title}</div>
       ))}
+      <button onClick={logout}>Logout</button>
     </div>
   );
 };
