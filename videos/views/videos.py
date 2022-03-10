@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from videos.serializers.videos.lite_video_serializer import LiteVideoSerializer
 from videos.serializers.videos.main_video_serializer import MainVideoSerializer
 
-from videos.models import Video
+from videos.models.video import Video
 
 
 class VideoViewSet(viewsets.ModelViewSet):

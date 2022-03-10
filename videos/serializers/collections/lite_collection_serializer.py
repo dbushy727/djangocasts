@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from videos.models import Collection
+from videos.models.collection import Collection
 
 
 class LiteCollectionSerializer(serializers.ModelSerializer):
