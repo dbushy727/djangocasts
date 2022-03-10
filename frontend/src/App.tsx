@@ -1,26 +1,16 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Login from "./auth/components/login";
+import useAuthToken from "./auth/hooks/useAuthToken";
+import Home from "./dashboard/components/home";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const { authToken, setAuthToken } = useAuthToken();
+
+  if (!authToken) {
+    return <Login setAuthToken={setAuthToken} />;
+  }
+
+  return <Home />;
 }
 
 export default App;
