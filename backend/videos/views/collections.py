@@ -9,4 +9,5 @@ class CollectionViewSet(viewsets.ModelViewSet):
     queryset = Collection.objects.all()
     serializer_class = MainCollecitonSerializer
     permission_classes = [permissions.IsAuthenticated]
+    lookup_field = 'slug'
 

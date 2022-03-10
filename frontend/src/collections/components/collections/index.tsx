@@ -3,7 +3,7 @@ import useLogout from "auth/hooks/useLogout";
 import useAxios from "core/hooks/useAxios";
 import Collection from "core/models/collection";
 
-const Home = () => {
+const Collections = () => {
   const [collections, setCollections] = useState<Collection[]>([]);
   const { axios } = useAxios();
   const { logout } = useLogout();
@@ -36,4 +36,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Collections;

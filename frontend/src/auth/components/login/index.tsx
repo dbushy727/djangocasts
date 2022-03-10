@@ -1,11 +1,7 @@
 import React, { FormEvent } from "react";
-import { AuthToken } from "../../hooks/useAuthToken/types";
 import useLogin from "../../hooks/useLogin";
 
-interface LoginProps {
-  setAuthToken: (authToken: AuthToken) => void;
-}
-const Login = ({ setAuthToken }: LoginProps) => {
+const Login = () => {
   const { login } = useLogin();
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -16,8 +12,7 @@ const Login = ({ setAuthToken }: LoginProps) => {
       string
     ];
 
-    const authToken = await login({ username, password });
-    setAuthToken(authToken);
+    await login({ username, password });
   };
 
   return (
