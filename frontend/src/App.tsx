@@ -5,11 +5,20 @@ import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import useAuthToken from "./auth/hooks/useAuthToken";
 import Collection from "collections/components/collection";
 import Login from "auth/components/login";
+import Video from "videos/components/video";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Homepage />} />
+      <Route
+        path="/videos/:slug"
+        element={
+          <ProtectedRoute>
+            <Video />
+          </ProtectedRoute>
+        }
+      />
       <Route path="/collections">
         <Route
           index
