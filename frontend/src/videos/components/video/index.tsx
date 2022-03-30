@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import useAxios from "core/hooks/useAxios";
 import VideoModel from "core/models/video";
+import useVideos from "core/hooks/api/useVideos";
 
 const Video = () => {
   const { slug } = useParams();
-  const { axios } = useAxios();
+  const { fetchVideo } = useVideos();
   const [video, setVideo] = useState<VideoModel | null>(null);
   const [error, setError] = useState<any>(null);
 
-  const fetchVideo = async (slug: string | undefined) => {
+  const fetch = async (slug: string | undefined) => {
     if (!slug) {
       return;
     }
 
     try {
-      const response = await axios.get(`videos/${slug}`);
+      const response = await fetchVideo(slug)
       setVideo(response.data);
       setError(null);
     } catch (error: any) {
@@ -24,7 +24,7 @@ const Video = () => {
   };
 
   useEffect(() => {
-    fetchVideo(slug);
+    fetch(slug);
   }, [slug]);
 
   if (error) {
