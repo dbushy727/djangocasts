@@ -1,21 +1,20 @@
-import React, { useEffect, useState } from "react";
-import useCollections from "core/hooks/api/useCollections";
-import useVideos from "core/hooks/api/useVideos";
+import React, { useCallback, useEffect, useState } from "react";
 import Collection from "core/models/collection";
 import Video from "core/models/video";
+import useApi from "core/hooks/api/useApi";
 
 const Homepage = () => {
-  const { fetchVideos } = useVideos();
-  const { fetchCollections } = useCollections();
+  const { fetchVideos, fetchCollections } = useApi();
+
   const [videos, setVideos] = useState<Video[]>([]);
   const [collections, setCollections] = useState<Collection[]>([]);
 
-  const fetch = async () => {
+  const fetch = useCallback(async () => {
     const videos = await fetchVideos();
     const collections = await fetchCollections();
     setVideos(videos);
     setCollections(collections);
-  }
+  }, [fetchVideos, fetchCollections, setVideos, setCollections]);
 
   useEffect(() => {
     fetch();
@@ -26,11 +25,15 @@ const Homepage = () => {
       <h1>Welcome to Djangocasts!</h1>
       <div>
         <h2>Latest Videos</h2>
-        {videos.map(video => (<p>{video.title}</p>))}
+        <ul>
+          {videos.map(video => (<li><a href={`/videos/${video.slug}`}>{video.title}</a></li>))}
+        </ul>
       </div>
       <div>
         <h2>Latest Collections</h2>
-        {collections.map(collection => (<p>{collection.title}</p>))}
+        <ul>
+          {collections.map(collection => (<li><a href={`/collections/${collection.slug}`}>{collection.title}</a></li>))}
+        </ul>
       </div>
     </>
   );

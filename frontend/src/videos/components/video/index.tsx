@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import VideoModel from "core/models/video";
-import useVideos from "core/hooks/api/useVideos";
+import useApi from "core/hooks/api/useApi";
 
 const Video = () => {
   const { slug } = useParams();
-  const { fetchVideo } = useVideos();
+  const { fetchVideo } = useApi();
   const [video, setVideo] = useState<VideoModel | null>(null);
   const [error, setError] = useState<any>(null);
 
