@@ -1,8 +1,8 @@
+import React, { useEffect, useState } from "react";
 import useCollections from "core/hooks/api/useCollections";
 import useVideos from "core/hooks/api/useVideos";
 import Collection from "core/models/collection";
 import Video from "core/models/video";
-import React, { useEffect, useState } from "react";
 
 const Homepage = () => {
   const { fetchVideos } = useVideos();
@@ -10,10 +10,16 @@ const Homepage = () => {
   const [videos, setVideos] = useState<Video[]>([]);
   const [collections, setCollections] = useState<Collection[]>([]);
 
+  const fetch = async () => {
+    const videos = await fetchVideos();
+    const collections = await fetchCollections();
+    setVideos(videos);
+    setCollections(collections);
+  }
+
   useEffect(() => {
-    fetchVideos().then(response => setVideos(response.data));
-    fetchCollections().then(response => setCollections(response.data));
-  }, [])  
+    fetch();
+  }, []);
 
   return (
     <>

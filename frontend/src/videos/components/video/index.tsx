@@ -15,8 +15,8 @@ const Video = () => {
     }
 
     try {
-      const response = await fetchVideo(slug)
-      setVideo(response.data);
+      const video = await fetchVideo(slug);
+      setVideo(video);
       setError(null);
     } catch (error: any) {
       setError(error.message);
